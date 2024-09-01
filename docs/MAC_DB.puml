@@ -1,0 +1,197 @@
+@startuml
+
+!define TABLE(x) entity x << (T,#FFAAAA) >>
+!define COLUMN(x) entity x << (C,#FFAAAA) >>
+
+skinparam class {
+    BackgroundColor<<TABLE>> LightBlue
+    BackgroundColor<<COLUMN>> White
+    BorderColor Black
+}
+
+' 管理者テーブル
+TABLE(admins) {
+    +id : INT <<PK>>
+    name : VARCHAR(255)
+    email : VARCHAR(255) <<UNIQUE>>
+    password : VARCHAR(255)
+    remember_token : VARCHAR(100)
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' 一般ユーザーテーブル
+TABLE(users) {
+    +id : INT <<PK>>
+    name : VARCHAR(255)
+    email : VARCHAR(255)
+    affiliation : VARCHAR(255)
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' アーティストテーブル
+TABLE(artists) {
+    +id : INT <<PK>>
+    name : VARCHAR(255)
+    email : VARCHAR(255) <<UNIQUE>>
+    password : VARCHAR(255)
+    bio : TEXT
+    pr_statement : TEXT
+    address : VARCHAR(255)
+    birthday : DATE 'YYYY-MM-DD'
+    phone_number : VARCHAR(20)
+    photo_url : VARCHAR(255)
+    email_verified_at : TIMESTAMP
+    token : VARCHAR(60) <<UNIQUE>> <<NULLABLE>>  // 追加された列
+    level : INT  // 追加された列
+    portfolio_pdf : VARCHAR(255) <<NULLABLE>>  // 追加された列
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+
+' アートワークテーブル
+TABLE(artworks) {
+    +id : INT <<PK>>
+    parent_id : INT <<FK NULLABLE>> ' メイン画像の場合はNULL、サブ画像の場合は関連するメイン画像のID
+    artist_id : INT <<FK>>
+    title : VARCHAR(255)
+    description : TEXT
+    image_path : VARCHAR(255)
+    year : INT
+    size : VARCHAR(50)
+    proved : BOOLEAN <<DEFAULT: 0>> ' (0: 非承認, 1: 承認)
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' タグテーブル
+TABLE(tags) {
+    +id : INT <<PK>>
+    tag_name : VARCHAR(50)
+    description : TEXT
+    tag_order : INT
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' 受賞歴テーブル
+TABLE(artist_awards) {
+    +id : INT <<PK>>
+    artist_id : INT <<FK>>
+    award_year : INT
+    award_details : VARCHAR(255)
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' お知らせテーブル
+TABLE(announcements) {
+    +id : INT <<PK>>
+    title : VARCHAR(255)
+    content : TEXT
+    author_type : VARCHAR(50)
+    author_id : INT
+    content_type : INT
+    close_date : YYYY-MM-DD
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' 仕事のオファーテーブル
+TABLE(offers) {
+    +id : INT <<PK>>
+    title : VARCHAR(255)
+    description : TEXT
+    offer_type : INT
+    status : INT  ' (0: offered, 1: accepted, 2: declined, 3: completed)
+    max_artists : INT
+    offered_at : TIMESTAMP
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+    deleted_at : TIMESTAMP
+}
+
+' オファーされたアーティストを管理するテーブル
+TABLE(offer_artists) {
+    +offer_id : INT <<FK>>
+    +artist_id : INT <<FK>>
+    responded_at : TIMESTAMP
+    status : VARCHAR(50)
+}
+
+' オファーされたタグ（作風）を管理するテーブル
+TABLE(offer_tags) {
+    +offer_id : INT <<FK>>  ' 仕事のオファーID
+    +tag_id : INT <<FK>>  ' 対象のタグID
+}
+
+' 問合せ管理テーブル
+
+entity "inquiries" as inquiries {
+    +id : INT <<PK>> <<NOT NULL>>
+    user_id : INT <<NOT NULL>>  ' 問合せ者のID (artistsまたはadmins,usersテーブルのID)
+    user_type : INT <<NOT NULL>> ' 問合せ者のタイプ ("2: user", "1: artist","0: admin")
+    inq_type : INT <<NOT NULL>>
+    subject : VARCHAR(255) <<NOT NULL>>
+    message : TEXT <<NOT NULL>>
+    status : INT <<NOT NULL>>  ' (0: unread, 1: read, 2: replyed, 3: closed)
+    parent_id : INT <<FK>>
+    created_at : TIMESTAMP <<NOT NULL>>
+    updated_at : TIMESTAMP <<NOT NULL>>
+    deleted_at : TIMESTAMP
+}
+
+' 通知テーブル
+TABLE(notifications) {
+    +id : INT <<PK>>
+    artist_id : INT <<FK NULLABLE>>  ' 通知を受け取るアーティストのID。管理者宛の場合はNULLまたは0
+    type : VARCHAR(50)  ' 通知の種類（例: artwork_registered, offer_receivedなど）
+    data : TEXT  ' 通知に関連する追加情報（JSON形式で保存）
+    is_read : BOOLEAN <<DEFAULT: 0>>  ' 既読ステータス（0: 未読, 1: 既読）
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+
+' 中間テーブル (アートワークとタグのリレーションを表現)
+TABLE(artwork_tags) {
+    +artwork_id : INT <<FK>>
+    +tag_id : INT <<FK>>
+}
+
+' 中間テーブル (アーティストとタグのリレーションを表現)
+TABLE(artist_tags) {
+    +artist_id : INT <<FK>>
+    +tag_id : INT <<FK>>
+}
+
+
+' テーブル間のリレーション
+artists ||--o{ artworks : "1:N"
+artworks ||--o{ artwork_tags : "1:N"
+tags ||--o{ artwork_tags : "1:N"
+artists ||--o{ artist_tags : "1:N"
+tags ||--o{ artist_tags : "1:N"
+admins ||--o{ announcements : "admin_id"
+artists ||--o{ announcements : "artist_id"
+offers ||--o{ offer_artists : "1:N"
+artists ||--o{ offer_artists : "1:N"
+offers ||--o{ offer_tags : "1:N"
+tags ||--o{ offer_tags : "1:N"
+artists ||--o{ artist_awards : "1:N"
+artists ||--o{ inquiries : "1:N (user_typeが'artist'の場合)"
+users ||--o{ inquiries : "1:N (user_typeが'user'の場合)"
+admins ||--o{ inquiries : "1:N (user_typeが'admin'の場合)"
+artists ||--o{ notifications : "1:N (artist_idが存在する場合)"
+admins ||--o{ notifications : "1:N (artist_idがNULLまたは0の場合)"
+artworks ||--o{ artworks : "1
+@enduml

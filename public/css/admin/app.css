@@ -1,0 +1,235 @@
+/***************************/
+/* 管理画面全体レイアウト        */
+/***************************/
+#header {
+    height: 3rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    color:white;
+    background-color: #2f2f2f;
+}
+#sidebar {
+    width: 200px;
+    height: calc(100vh - 3rem); /* ヘッダーの高さを引いた分 */
+    padding:0;
+    position: fixed;
+    top: 3rem; /* ヘッダーの高さ分下げる */
+    left: 0;
+    background-color: #2f2f2f;
+    overflow-y: auto;
+}
+#side-nav { width:100%; }
+#side-nav li{ border-bottom:1px solid #1f1f1f; border-top:1px solid #4f4f4f; }
+#content {
+    margin-left: 200px;
+    margin-top: 60px; /* ヘッダーの高さ分下げる */
+    padding: 20px;
+}
+
+/***************************/
+/* 管理画面共通要素　          */
+/***************************/
+h2.page-title {
+    font-size:1.6rem
+}
+#hints_content h2 { font-size:1.4rem }
+h3.content-title {
+    font-size:1.2rem;
+}
+h4.area-title {font-siZe:1rem;font-weight:bold;}
+main {
+    max-width: 1200px; /* PC向けのデフォルトスタイル */
+    margin-top:2rem;
+}
+
+@media (max-width: 768px) {
+    main {
+        max-width: 700px; /* タブレット向けのスタイル */
+    }
+}
+
+
+
+/***************************/
+/* 管理画面ヘッダー内部        */
+/***************************/
+.nav-link{color:white;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.nav-link.active { background-color: #1f1f1f; }
+.nav-link:hover{color:white; background-color:#3f3f3f;}
+.nav-link:active { background-color:#1f1f1f; color:white; }
+.navbar-brand {color:white;font-weight:bold;}
+.navbar-brand:hover {color:white;}
+.admin_header_nav{line-height:3rem;}
+.admin_header_nav .nav-item{ margin-right:1rem; }
+.admin_header_nav a.nav-link{padding:0;}
+/* バッヂスタイル */
+.position-relative {
+    position: relative;
+}
+.notification-badge {
+    position: absolute;
+    bottom: 7px;
+    right: -10px;
+    padding: 3px 5px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.notifications-dropdown {
+    display: none; /* 初期状態で非表示 */
+    position: absolute;
+    top: 3rem; /* 通知アイコンの下に表示 */
+    right: 0;
+    background-color: #4f4f4f;
+    border-radius: 5px;
+    padding:0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* 他の要素より前面に表示 */
+}
+
+.notifications-dropdown a {
+    padding: 10px;
+    color: #f8f9fa;
+    text-decoration: none;
+    display: block;
+}
+
+.notifications-dropdown a:hover {
+    background-color: #f8f9fa;
+    color:#333;
+}
+
+/***************************/
+/* 管理画面content内部        */
+/***************************/
+p{ font-size:1rem; }
+.col-12{ padding-right:0; }
+.full-width-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    background-color: #28a745;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.full-width-btn:hover {
+    background-color: #218838; /* ボタンの背景色を少し暗くする */
+    transform: scale(1.02); /* ホバー時に少し大きくする */
+}
+
+/*ヒントウィンドウ*/
+#content_wrapper {
+    position: relative;
+    overflow: hidden;
+}
+#hints_window {
+    position: fixed;
+    top: 0;
+    right: 0; /* 初期状態では画面内に表示 */
+    margin-top:3rem;
+    width: 300px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease; /* スライドイン・アウトのアニメーション */
+    z-index: 1000; /* コンテンツより前面に表示 */
+}
+#toggle_hint {
+    position: absolute; /* hints_windowに対して相対的に配置 */
+    top: 1rem;
+    left: -2.6rem; /* hints_windowの外側に配置するために負の値を指定 */
+    width: 2.6rem;
+    height: 2.4rem;
+    background-color: #4f4f4f;
+    border-radius:0.5rem 0 0 0.5rem;
+    color: white;
+    line-height:2.2rem;
+    font-size:1.6rem;
+    cursor: pointer;
+    z-index: 1001; /* #hints_windowよりも前面に表示 */
+    text-align: center; /* テキストを中央揃えにする */
+    outline: none;
+    tab-index:-1;
+    user-select: none;
+}
+#toggle_hint i {
+    transform: rotate(90deg); /* アイコンを90度回転 */
+    display: inline-block; /* 回転が適用されるようにインラインブロックに設定 */
+}
+#hints_content {
+    padding: 20px;
+}
+
+.hint_article {
+    margin-bottom: 15px;
+}
+
+/***************************/
+/* 設定画面        */
+/***************************/
+.settingMenu {
+    margin:2rem;
+    padding:1rem;
+    border:1px solid #1a202c;
+    border-radius:9px;
+}
+.settingMenu h3 { font-size:1.2rem }
+
+/***************************/
+/* 作家一覧用のスタイル       */
+/***************************/
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right:0;
+}
+.artist_frame {
+    flex: 0 0 auto;
+    width: 260px;
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    position: relative;
+    padding-bottom: 50px;
+}
+.button-container {
+    position: absolute;
+    bottom: 0px; /* 下からの距離 */
+    left: 0;
+    right: 0;
+    text-align: center;
+
+}
+.tagname {
+    display: inline-block;
+    margin-right: 0.5rem;
+    margin-bottom:0.5rem;
+    background-color: #253f73;
+    color:white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size:0.8rem;
+}
+
+.child-thumbnails img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.modal .carousel-inner img {
+    max-height: 500px;
+    object-fit: contain;
+}
