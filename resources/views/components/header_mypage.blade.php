@@ -15,9 +15,8 @@
                             <i class="fas fa-bell"></i>
                         </a>
                         <span class="badge badge-pill badge-danger notification-badge">
-                        5
+                        1
                         </span>
-
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('artist.logout') }}" title="ログアウト"><i class="fas fa-sign-out-alt"></i></a>
