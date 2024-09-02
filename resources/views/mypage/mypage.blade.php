@@ -8,7 +8,7 @@
                 <div class="card">
                     <h2 class="section_title">プロフィール</h2>
                     <div class="myPhoto">
-                        <img src="{{ asset('storage/' . $artist['photo_url']) }} ?? '#' }}" alt="アー写">
+                        <img src="{{ asset('storage/' . $artist['photo_url'] ?? '#' }}" alt="アー写">
                         <ul class="controlBox">
                             <li><i class="fa-solid fa-cloud-arrow-up"></i></li>
                             <li><i class="fa-solid fa-pen-to-square"></i></li>
