@@ -48,11 +48,10 @@ ul#artwork_area > li img {
 @media (max-width: 991.98px) {
     h1{font-size:1.5rem}
     h2{font-size:1.3rem}
+    h3{font-size:1.1rem;}
     .card{padding:1rem;}
     .page_title{}
-    .section_title{
-        font-size:1.2rem;
-    }
+
     #main_nav {
         position: fixed;
         bottom: 0;

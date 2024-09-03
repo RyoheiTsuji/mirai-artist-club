@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.dual-login');
 });
 /*一般ページ問い合わせルート*/
 Route::get('/inquiry', function(){

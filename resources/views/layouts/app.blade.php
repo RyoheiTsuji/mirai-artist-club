@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/admin/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mypage/app.css') }}">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/admin_app.js') }}" defer></script>
+    <script src="{{ asset('js/mypage_app.js') }}" defer></script>
 </head>
 <body>
 @include('components.header')

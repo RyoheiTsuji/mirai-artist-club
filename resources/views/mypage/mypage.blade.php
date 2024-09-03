@@ -8,7 +8,7 @@
                 <div class="card">
                     <h2 class="section_title">プロフィール</h2>
                     <div class="myPhoto">
-                        <img src="{{ asset('storage/' . $artist['photo_url']) }} ?? '#' }}" alt="アー写">
+                        <img src="{{ asset('storage/' . $artist['photo_url']) }}" alt="アー写">
                         <ul class="controlBox">
                             <li><i class="fa-solid fa-cloud-arrow-up"></i></li>
                             <li><i class="fa-solid fa-pen-to-square"></i></li>
@@ -60,7 +60,7 @@
                         @foreach($artist->artworks as $artwork)
                             <li class="">
                                 <strong>{{ $artwork->title }}</strong> ({{ $artwork->year }})<br>
-                                <img src="{{ Storage::url($artwork->image_path) }}" alt="{{ $artwork->title }}" style="max-width: 100px;">
+                                <img src="{{ asset('storage/' . $artwork->image_path) }}" alt="{{ $artwork->title }}" style="max-width: 100px;">
                                 <p>{{ $artwork->description }}</p>
                             </li>
                         @endforeach
