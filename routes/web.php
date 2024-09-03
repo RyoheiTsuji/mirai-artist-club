@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Mypage\MypageController;
 use App\Http\Controllers\Mypage\MypageArtworkController;
+use App\Http\Controllers\Mypage\MypageProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ArtistRegistrationController;
 use Illuminate\Support\Facades\Mail;
@@ -109,6 +110,10 @@ Route::middleware(['auth:admin'])->group(function () {
 // マイページ内のルート設定
 Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage', [MypageController::class, 'index'])->name('artist.mypage');
+    //プロフィール関連のルート
+    Route::post('/mypage/photo-upload', [MypageProfileController::class, 'photoUpload'])->name('mypage.photo.upload');
+    Route::post('/mypage/profile/update', [MypageProfileController::class, 'updateProfile'])->name('mypage.profile.update');
+
 
     //ポートフォリオ登録用のルート
     Route::post('/mypage/portfolio/register', [\App\Http\Controllers\Mypage\PortfolioController::class, 'upload'])->name('portfolio.upload');
