@@ -109,9 +109,15 @@ TABLE(announcements) {
 ' 仕事のオファーテーブル
 TABLE(offers) {
     +id : INT <<PK>>
-    title : VARCHAR(255)
-    description : TEXT
+    +title : VARCHAR(255)  ' 案件タイトル
     offer_type : INT
+    biz_type : INT
+    +duration : VARCHAR(255)  ' 案件期間 (Xヶ月 or X月○日～△月□日)
+    +budget : INT  ' 案件予算
+    +application_deadline : DATE  ' 募集締め切り
+    +reward : VARCHAR(255)  ' 報酬 (金額または応相談)
+    recruit_number : INT
+    description : TEXT
     status : INT  ' (0: offered, 1: accepted, 2: declined, 3: completed)
     max_artists : INT
     offered_at : TIMESTAMP

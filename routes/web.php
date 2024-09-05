@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Mypage\MypageController;
 use App\Http\Controllers\Mypage\MypageArtworkController;
+use App\Http\Controllers\Mypage\MypageProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ArtistRegistrationController;
 use Illuminate\Support\Facades\Mail;
@@ -86,8 +87,16 @@ Route::middleware(['auth:admin'])->group(function () {
     //作家管理画面のルート
     Route::get('/admin/artist', [ArtistController::class, 'index'])->name('admin.artist');
     Route::get('/admin/artist/detail/{id}', [ArtistController::class, 'detail'])->name('admin.artist.detail');
-    //オファー管理画面のルート
-    Route::get('/admin/offer', [OfferController::class, 'index'])->name('admin.offer');
+    // オファー管理画面のルート
+    Route::get('/admin/offer', [OfferController::class, 'index'])->name('admin.offer'); // 一覧表示
+    Route::get('/admin/offer/create', [OfferController::class, 'create'])->name('admin.offer.create'); // 新規作成画面
+    Route::post('/admin/offer/store', [OfferController::class, 'store'])->name('admin.offer.store'); // 新規作成処理
+    Route::get('/admin/offer/{id}/edit', [OfferController::class, 'edit'])->name('admin.offer.edit'); // 編集画面
+    Route::put('/admin/offer/{id}', [OfferController::class, 'update'])->name('admin.offer.update'); // 更新処理
+    Route::post('/admin/offer/delete', [OfferController::class, 'delete'])->name('admin.offer.delete'); // 削除処理
+    Route::post('/admin/offer/search-artists', [OfferController::class, 'searchArtists'])->name('admin.offer.searchArtists'); // 作家検索処理
+
+
     Route::get('/admin/inquiry', [AdminInquiryController::class, 'index'])->name('admin.inquiry');
     Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message');
     Route::get('/admin/catalogue', [CatalogueController::class, 'index'])->name('admin.catalogue');
@@ -109,6 +118,10 @@ Route::middleware(['auth:admin'])->group(function () {
 // マイページ内のルート設定
 Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage', [MypageController::class, 'index'])->name('artist.mypage');
+    //プロフィール関連のルート
+    Route::post('/mypage/photo-upload', [MypageProfileController::class, 'photoUpload'])->name('mypage.photo.upload');
+    Route::post('/mypage/profile/update', [MypageProfileController::class, 'updateProfile'])->name('mypage.profile.update');
+
 
     //ポートフォリオ登録用のルート
     Route::post('/mypage/portfolio/register', [\App\Http\Controllers\Mypage\PortfolioController::class, 'upload'])->name('portfolio.upload');

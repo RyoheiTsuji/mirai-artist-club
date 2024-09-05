@@ -69,50 +69,100 @@ ul#artwork_area > li img {
         padding-bottom: 3rem; /* main_nav分の余白を追加 */
     }
 /*mypageトップ*/
-    .myPhoto{
-        position:relative;
-        width:70%;
-        margin:1rem 15%;
-        border: 1px solid #ccc;
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* カードにシャドウを追加 */
+        padding: 1.5rem; /* カード内に余白を追加 */
+        border-radius: 8px; /* カードの角を丸く */
+        background-color: #fff; /* 背景を白に設定 */
     }
+
+    .myPhoto {
+        position: relative;
+        width: 84%;
+        margin: 1rem auto; /* 中央揃え */
+        border: 1px solid #ccc;
+        border-radius: 8px; /* 角を丸くする */
+        overflow: hidden; /* 画像が枠を超えないようにする */
+    }
+
     .myPhoto img {
         width: 100%; /* 画像を枠内で完全に表示 */
         height: auto; /* アスペクト比を維持 */
         display: block; /* 画像周囲の余白をなくす */
     }
-    ul.controlBox{
+
+    ul.controlBox {
         position: absolute; /* 親要素（myPhoto）内で絶対配置 */
-        margin-bottom:0;
+        margin-bottom: 0;
         bottom: 0.4rem; /* 右下に配置 */
         right: 0.4rem; /* 右下に配置 */
         display: flex; /* li要素を横並びにする */
         gap: 10px; /* アイコン間の間隔を調整 */
     }
+
     .controlBox li {
         list-style: none; /* liのリストスタイルを削除 */
     }
+
     .controlBox i {
-        font-size: 1.5rem; /* アイコンのサイズを調整（任意） */
+        font-size: 1.5rem; /* アイコンのサイズを調整 */
         color: #fff; /* アイコンの色を設定 */
-        background-color: rgba(0, 0, 0, 0.5); /* アイコン背景を半透明に設定 */
-        padding: 5px; /* アイコン周囲に余白を追加 */
-        border-radius: 5px; /* 角を丸くする */
+        background-color: rgba(0, 0, 0, 0.6); /* アイコン背景を濃い目の半透明に設定 */
+        padding: 8px; /* アイコン周囲に余白を追加 */
+        border-radius: 50%; /* アイコンを丸くする */
         cursor: pointer; /* マウスカーソルをポインタに */
+        transition: background-color 0.3s; /* ホバー時の背景色変化を滑らかに */
     }
 
-    .artist_info{
-        display:flex;
-        flex-wrap: wrap;
-        width:80%;
-        margin:auto;
+    .controlBox i:hover {
+        background-color: rgba(255, 255, 255, 0.8); /* ホバー時に背景色を明るく */
+        color: #333; /* ホバー時のアイコン色を変更 */
     }
-    .artist_info dt{width:30%;}
-    .artist_info dd{ width:70%; }
-    .artist_detail{width:80%; margin:auto;}
+
+    .artist_info {
+        display: flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 2rem auto; /* 余白を追加 */
+        background-color: #f8f9fa; /* 背景色を薄いグレーに */
+        padding: 1rem; /* 余白を追加 */
+        border-radius: 8px; /* 角を丸くする */
+    }
+
+    .artist_info dt {
+        width: 35%; /* タイトルの幅を調整 */
+        font-weight: bold; /* 太字にする */
+        padding-right: 1rem; /* 余白を追加 */
+    }
+
+    .artist_info dd {
+        width: 65%; /* 内容の幅を調整 */
+        margin-bottom: 1rem; /* 各項目の間に余白を追加 */
+    }
+
+    .artist_detail {
+        width: 80%;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #fff; /* 背景を白に設定 */
+        border-radius: 8px; /* 角を丸くする */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
+    }
+
+    ul#artwork_area {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem; /* 各アイテムの間に余白を追加 */
+    }
 
     ul#artwork_area > li {
-        flex: 0 0 50%; /* 100%幅に設定 */
-        max-width: 50%; /* 最大幅も100%に設定 */
+        flex: 0 0 45%; /* 幅を45%に設定 */
+        max-width: 45%; /* 最大幅も45%に設定 */
+        background-color: #f8f9fa; /* 背景色を薄いグレーに */
+        border-radius: 8px; /* 角を丸くする */
+        padding: 1rem; /* 内側に余白を追加 */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
     }
+
 
 }
