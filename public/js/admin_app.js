@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function() { //hint windowのページロード時のアニメーション
     // 初期設定: アイコンの回転アニメーションを500msに設定
     $('#toggle_hint i').css('transition', 'transform 500ms ease');
 

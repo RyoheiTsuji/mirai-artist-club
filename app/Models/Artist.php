@@ -98,4 +98,15 @@ class Artist extends Authenticatable
     {
         return $this->hasMany(Artwork::class);
     }
+
+    /**
+     * アーティストが関わるオファーを取得
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function offers(): BelongsToMany
+    {
+        return $this->belongsToMany(Offer::class, 'offer_artists', 'artist_id', 'offer_id');
+    }
+
 }

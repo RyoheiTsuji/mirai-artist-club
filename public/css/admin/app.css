@@ -44,6 +44,69 @@ main {
     max-width: 1200px; /* PC向けのデフォルトスタイル */
     margin-top:2rem;
 }
+.tag-label {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 3px;
+    padding: 2px 8px;
+    margin-right: 5px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+}
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.list-group-item .col-auto {
+    flex-basis: 50px; /* 左カラムの幅を固定 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-group-item .col {
+    flex-grow: 1;
+}
+
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.artist-name-level {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.artist-tags {
+    margin-top: 5px;
+}
+
+.level-1 {
+    background-color: #f5f5dc !important; /* レベル1: ベージュ */
+}
+
+.level-2 {
+    background-color: #dcedc8 !important; /* レベル2: 淡いグリーン */
+}
+
+.level-3 {
+    background-color: #f8bbd0 !important; /* レベル3: 淡いピンク */
+}
+
+.tag-label {
+    display: inline-block;
+    background-color: #e0e0e0;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    margin-right: 0.2rem;
+}
+
 
 @media (max-width: 768px) {
     main {
@@ -110,6 +173,41 @@ main {
 /***************************/
 /* 管理画面content内部        */
 /***************************/
+/* フォームの間隔調整 */
+form .mb-3 {
+    margin-bottom: 1.5rem; /* 各フォーム要素間のスペースを広げる */
+}
+
+/* フォームの入力エリアを広げる */
+form .form-control, form .form-select {
+    padding: 0.75rem 1rem; /* パディングを増やして入力エリアを広げる */
+    border-radius: 5px; /* 角を丸くする */
+}
+
+/* ラベルを少し太くする */
+form .form-label {
+    font-weight: 600; /* ラベルを太字に */
+}
+
+/* ボタンのスタイル調整 */
+form .btn-primary {
+    padding: 0.75rem 2rem; /* ボタンのサイズを大きくする */
+    font-size: 1.1rem; /* ボタンのテキストサイズを調整 */
+    border-radius: 8px; /* ボタンの角を丸くする */
+}
+
+/* テキストエリアの行間を広げる */
+form .form-control {
+    line-height: 1.5;
+}
+/* 必須ラベルのスタイル */
+.required-label {
+    color: red; /* 必須ラベルを赤色で表示 */
+    font-size: 0.9rem;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
 p{ font-size:1rem; }
 .col-12{ padding-right:0; }
 .full-width-btn {
@@ -232,4 +330,65 @@ p{ font-size:1rem; }
 .modal .carousel-inner img {
     max-height: 500px;
     object-fit: contain;
+}
+
+/***************************/
+/* 案件管理ページのスタイル       */
+/***************************/
+.w-100{width:100%;}
+/* メッセージツリーのスタイル */
+.list-group-item {
+    border: none; /* リストアイテムのボーダーを削除 */
+    background-color: #f9f9f9; /* 背景色を淡いグレーに */
+    margin-bottom: 10px; /* アイテム間に余白を追加 */
+    border-radius: 5px; /* アイテムの角を丸く */
+    padding:0;
+}
+
+/* メインの案件タイトルのスタイル */
+.list-group-item > strong {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* サブメッセージのリスト */
+.list-group-item ul.list-group {
+    margin-left: 20px; /* インデントを追加してツリー構造を強調 */
+    margin-top: 10px;
+}
+
+/* 各メッセージのスタイル */
+.list-group-item ul.list-group li.list-group-item {
+    background-color: #e9ecef; /* サブメッセージの背景色をやや濃いグレーに */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* メッセージ内の発信者名 */
+.list-group-item ul.list-group li.list-group-item strong {
+    color: #007bff; /* 発信者名を青に */
+}
+
+/* メッセージ本文のスタイル */
+.list-group-item ul.list-group li.list-group-item div {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #555; /* メッセージ本文の色を薄く */
+}
+
+/* タイムスタンプのスタイル */
+.list-group-item ul.list-group li.list-group-item span {
+    font-size: 0.8rem;
+    color: #888; /* タイムスタンプの色をさらに薄く */
+    display: block;
+    margin-top: 5px;
+}
+/* アイコンをモノトーンにするスタイル */
+.card-body .list-group-item a {
+    color: #6c757d; /* モノトーンカラー (通常はグレー) */
+    transition: color 0.3s;
+}
+
+.card-body .list-group-item a:hover {
+    color: #343a40; /* ホバー時に少し濃いグレーに変更 */
 }
