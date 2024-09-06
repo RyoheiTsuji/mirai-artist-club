@@ -98,10 +98,17 @@ Route::middleware(['auth:admin'])->group(function () {
 
 
     Route::get('/admin/inquiry', [AdminInquiryController::class, 'index'])->name('admin.inquiry');
+    // メッセージ管理画面のルート
     Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message');
+    Route::get('/admin/message/list', [MessageController::class, 'list'])->name('admin.message.list');
+    Route::get('/admin/message/create', [MessageController::class, 'create'])->name('admin.message.create');
+    Route::get('/admin/message/detail', [MessageController::class, 'detail'])->name('admin.message.detail');
+    Route::get('/admin/message/send', [MessageController::class, 'send'])->name('admin.message.send');
+    // カタログ作成
     Route::get('/admin/catalogue', [CatalogueController::class, 'index'])->name('admin.catalogue');
     Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice');
     Route::get('/admin/page', [PageController::class, 'index'])->name('admin.page');
+    //売買管理
     Route::get('/admin/sales', [SalesController::class, 'index'])->name('admin.sales');
     Route::get('/admin/setting', [SettingController::class, 'index'])->name('admin.setting');
     // タグ管理用のルート
