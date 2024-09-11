@@ -26,4 +26,6 @@ class AddRecipientIdToMessageSenderstable extends Migration
             $table->dropColumn('recipients');
         });
     }
+
+
 }

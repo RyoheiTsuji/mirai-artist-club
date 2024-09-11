@@ -39,6 +39,8 @@ return new class extends Migration
             // カラムの削除
             $table->dropColumn(['created_by_admin_id', 'created_by_artist_id', 'submitted_by_user_id']);
         });
+
+
     }
 
 };

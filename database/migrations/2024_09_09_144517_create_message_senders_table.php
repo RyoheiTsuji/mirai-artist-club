@@ -35,4 +35,6 @@ class CreateMessageSendersTable extends Migration
     {
         Schema::dropIfExists('message_senders');
     }
+
+
 }
