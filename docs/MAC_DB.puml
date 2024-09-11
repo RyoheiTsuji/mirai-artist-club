@@ -53,7 +53,6 @@ TABLE(artists) {
     deleted_at : TIMESTAMP
 }
 
-
 ' アートワークテーブル
 TABLE(artworks) {
     +id : INT <<PK>>
@@ -141,7 +140,6 @@ TABLE(offer_tags) {
 }
 
 ' 問合せ管理テーブル
-
 entity "inquiries" as inquiries {
     +id : INT <<PK>> <<NOT NULL>>
     user_id : INT <<NOT NULL>>  ' 問合せ者のID (artistsまたはadmins,usersテーブルのID)
@@ -167,7 +165,6 @@ TABLE(notifications) {
     updated_at : TIMESTAMP
 }
 
-
 ' 中間テーブル (アートワークとタグのリレーションを表現)
 TABLE(artwork_tags) {
     +artwork_id : INT <<FK>>
@@ -180,6 +177,25 @@ TABLE(artist_tags) {
     +tag_id : INT <<FK>>
 }
 
+' メッセージ管理テーブル
+TABLE(messages) {
+    +id : INT <<PK>>
+    parent_id : INT <<FK NULLABLE>>  ' メッセージ返信の場合の親メッセージID
+    title : VARCHAR(255) <<NULLABLE>>  ' メッセージタイトル
+    content : TEXT <<NOT NULL>>  ' メッセージ内容
+    status : INT <<DEFAULT: 0>>  ' メッセージのステータス、初期値は0
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
+
+' 中間テーブル: メッセージ送信者を管理
+TABLE(message_senders) {
+    +message_id : INT <<FK>>  ' メッセージID
+    +sender_id : INT <<FK>>  ' 送信者ID（アーティストまたは管理者）
+    sender_type : VARCHAR(50)  ' 送信者のタイプ（'artist' または 'admin'）
+    created_at : TIMESTAMP
+    updated_at : TIMESTAMP
+}
 
 ' テーブル間のリレーション
 artists ||--o{ artworks : "1:N"
@@ -199,5 +215,9 @@ users ||--o{ inquiries : "1:N (user_typeが'user'の場合)"
 admins ||--o{ inquiries : "1:N (user_typeが'admin'の場合)"
 artists ||--o{ notifications : "1:N (artist_idが存在する場合)"
 admins ||--o{ notifications : "1:N (artist_idがNULLまたは0の場合)"
-artworks ||--o{ artworks : "1
+artworks ||--o{ artworks : "1"
+artists ||--o{ message_senders : "1:N (sender_idがartistの場合)"
+admins ||--o{ message_senders : "1:N (sender_idがadminの場合)"
+messages ||--o{ message_senders : "1:N"
+
 @enduml

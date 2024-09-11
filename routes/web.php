@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InquiryController as UserInquiryController;
 use App\Http\Controllers\Auth\AdminAuthController;
@@ -31,16 +32,19 @@ use Illuminate\Support\Facades\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/*サイトトップページ*/
+Route::get('/',  [FrontController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('auth.dual-login');
-});
+
+
 /*一般ページ問い合わせルート*/
 Route::get('/inquiry', function(){
     return view('user_inquiry');
 });
 Route::get('/inquiry', [UserInquiryController::class, 'index'])->name('inquiry.form');
 Route::post('/inquiry', [UserInquiryController::class, 'submitForm'])->name('inquiry.submit');
+
+
 
 // エラーページへのルートを
 Route::get('/error-page', function () {
@@ -76,7 +80,7 @@ Route::get('/artist/register/details', [ArtistRegistrationController::class, 'sh
 Route::post('/artist/register/details', [ArtistRegistrationController::class, 'submitDetails'])->name('artist.details.submit');
 
 // 一般画面内のルート設定
-Route::get('/dual-login', function () {
+Route::get('/inquiry', function () {
     return view('auth.dual-login');
 })->name('dual-login');
 
@@ -96,14 +100,18 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/admin/offer/delete', [OfferController::class, 'delete'])->name('admin.offer.delete'); // 削除処理
     Route::post('/admin/offer/search-artists', [OfferController::class, 'searchArtists'])->name('admin.offer.searchArtists'); // 作家検索処理
 
-
+    //フロントからのお問い合わせ管理
     Route::get('/admin/inquiry', [AdminInquiryController::class, 'index'])->name('admin.inquiry');
+    Route::get('/admin/inquiry/messages/{inquiryId}', [AdminInquiryController::class, 'getMessages']);
+    Route::post('/admin/inquiry/reply', [AdminInquiryController::class, 'reply'])->name('inquiry.reply');
+
     // メッセージ管理画面のルート
     Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message');
     Route::get('/admin/message/list', [MessageController::class, 'list'])->name('admin.message.list');
-    Route::get('/admin/message/create', [MessageController::class, 'create'])->name('admin.message.create');
+    Route::post('/admin/message/store', [MessageController::class, 'store'])->name('admin.message.store');
     Route::get('/admin/message/detail', [MessageController::class, 'detail'])->name('admin.message.detail');
     Route::get('/admin/message/send', [MessageController::class, 'send'])->name('admin.message.send');
+    Route::get('/admin/message/search', [MessageController::class, 'search'])->name('admin.message.search');
     // カタログ作成
     Route::get('/admin/catalogue', [CatalogueController::class, 'index'])->name('admin.catalogue');
     Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice');
