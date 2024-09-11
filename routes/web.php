@@ -20,6 +20,7 @@ use App\Http\Controllers\Mypage\MypageArtworkController;
 use App\Http\Controllers\Mypage\MypageProfileController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ArtistRegistrationController;
+use App\Http\Controllers\FileUploadController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 /*
@@ -32,6 +33,10 @@ use Illuminate\Support\Facades\Request;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
 /*サイトトップページ*/
 Route::get('/',  [FrontController::class, 'index'])->name('home');
 
@@ -127,6 +132,11 @@ Route::middleware(['auth:admin'])->group(function () {
     //管理者追加と削除のルート
     Route::post('/admin/setting/admin_register',[SettingController::class, 'adminRegistration'])->name('admin.RegAdmin');
     Route::post('/admin/setting/admin_delete',[SettingController::class, 'deleteAdmin'])->name('admin.deleteAdmin');
+
+    /*画像ファイルアップロード用*/
+    Route::get('/admin/file-upload', [FileUploadController::class, 'index'])->name('admin.file.upload');
+    Route::post('/admin/file-upload', [FileUploadController::class, 'upload'])->name('admin.file.upload.submit');
+
     // 他の管理画面内のルートもここに追加します
 });
 
