@@ -23,7 +23,7 @@
 
 
     <!-- Scripts -->
-    <script src="{{ asset('js/admin_app.js') }}" defer></script>
+    <!-- script src="{{ asset('js/admin_app.js') }}" defer></script -->
 </head>
 <body>
 @include('components.header_admin')
@@ -43,7 +43,8 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/message.js') }}"></script>
 @stack('scripts')
 </body>
 

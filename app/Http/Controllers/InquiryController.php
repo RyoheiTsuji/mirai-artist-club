@@ -51,4 +51,6 @@ class InquiryController
 
         return redirect()->back()->with('success', '問い合わせを送信しました。');
     }
+
+
 }
