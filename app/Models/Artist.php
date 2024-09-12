@@ -109,4 +109,18 @@ class Artist extends Authenticatable
         return $this->belongsToMany(Offer::class, 'offer_artists', 'artist_id', 'offer_id');
     }
 
+    /**
+     * アーティストが送信したメッセージを取得
+     */
+    public function sentMessages()
+    {
+        return $this->belongsToMany(Message::class, 'message_senders', 'sender_id', 'message_id')
+            ->wherePivot('sender_type', 'artist');
+    }
+
+    public function inquiries()
+    {
+        return $this->morphMany(Inquiry::class, 'user');
+    }
+
 }

@@ -11,7 +11,12 @@ class Inquiry extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id',
+        'admin_id',    // 管理者の外部キー
+        'artist_id',   // 作家の外部キー
+        'user_id',     // 一般ユーザの外部キー
+        'submitted_by_user_id',
+        'created_by_admin_id',
+        'created_by_artist_id',
         'user_type',
         'inq_type',
         'subject',
@@ -28,7 +33,17 @@ class Inquiry extends Model
 
     public function user()
     {
-        return $this->morphTo();  // user_typeに基づいて適切なモデルを関連付け
+        return $this->belongsTo(User::class, 'submitted_by_user_id');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'created_by_admin_id');
+    }
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class, 'created_by_artist_id');
     }
 
     public function parentInquiry()
@@ -41,3 +56,4 @@ class Inquiry extends Model
         return $this->hasMany(Inquiry::class, 'parent_id');
     }
 }
+

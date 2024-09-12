@@ -47,4 +47,19 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 管理者が送信したメッセージを取得
+     */
+    public function sentMessages()
+    {
+        return $this->belongsToMany(Message::class, 'message_senders', 'sender_id', 'message_id')
+            ->wherePivot('sender_type', 'admin');
+    }
+
+    public function inquiries()
+    {
+        return $this->morphMany(Inquiry::class, 'user');
+    }
+
 }

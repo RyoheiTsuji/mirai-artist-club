@@ -16,26 +16,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/mypage/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/front.css') }}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/mypage_app.js') }}" defer></script>
 </head>
 <body>
-@include('components.header')
-<div class="container-fluid">
-    <div class="row">
-        <!-- 右カラム：コンテンツ表示用 -->
-        <div class="col" id="content">
-            <div class="container-fluid">
-                @yield('content')
-            </div>
-        </div>
-    </div>
+@include('components.header_front')
+<div class="front_container">
+    @yield('content')
 </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/front_app.js') }}" defer></script>
 @stack('scripts')
 </html>

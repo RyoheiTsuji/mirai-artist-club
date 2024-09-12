@@ -344,38 +344,32 @@ p{ font-size:1rem; }
     border-radius: 5px; /* アイテムの角を丸く */
     padding:0;
 }
-
 /* メインの案件タイトルのスタイル */
 .list-group-item > strong {
     font-size: 1.1rem;
     color: #333;
 }
-
 /* サブメッセージのリスト */
 .list-group-item ul.list-group {
     margin-left: 20px; /* インデントを追加してツリー構造を強調 */
     margin-top: 10px;
 }
-
 /* 各メッセージのスタイル */
 .list-group-item ul.list-group li.list-group-item {
     background-color: #e9ecef; /* サブメッセージの背景色をやや濃いグレーに */
     padding: 10px;
     border-radius: 5px;
 }
-
 /* メッセージ内の発信者名 */
 .list-group-item ul.list-group li.list-group-item strong {
     color: #007bff; /* 発信者名を青に */
 }
-
 /* メッセージ本文のスタイル */
 .list-group-item ul.list-group li.list-group-item div {
     margin-top: 5px;
     font-size: 0.9rem;
     color: #555; /* メッセージ本文の色を薄く */
 }
-
 /* タイムスタンプのスタイル */
 .list-group-item ul.list-group li.list-group-item span {
     font-size: 0.8rem;
@@ -388,7 +382,6 @@ p{ font-size:1rem; }
     color: #6c757d; /* モノトーンカラー (通常はグレー) */
     transition: color 0.3s;
 }
-
 .card-body .list-group-item a:hover {
     color: #343a40; /* ホバー時に少し濃いグレーに変更 */
 }

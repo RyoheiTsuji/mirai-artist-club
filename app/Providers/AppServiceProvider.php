@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Notification;
 use App\Models\Artist;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,5 +47,13 @@ class AppServiceProvider extends ServiceProvider
             // デバッグ: ビューに渡されるデータを確認
             Log::info('ビューに渡す通知:', $notifications->toArray());
         });
+
+        Relation::morphMap([
+            0 => 'App\Models\Admin', // user_typeが0のときにAdminモデルを使う
+            1 => 'App\Models\Artist', // user_typeが1のときにArtistモデルを使う
+            2 => 'App\Models\User',    // user_typeが2のときにUserモデルを使う
+        ]);
     }
+
+
 }

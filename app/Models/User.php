@@ -24,6 +24,6 @@ class User extends Model
 
     public function inquiries()
     {
-        return $this->hasMany(Inquiry::class)->where('user_type', 'user');
+        return $this->morphMany(Inquiry::class, 'user');
     }
 }
