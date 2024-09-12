@@ -15,9 +15,7 @@
 
                 fetch('{{ route('mypage.photo.upload') }}', {
                     method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
+                    headers: {'X-CSRF-TOKEN': csrfToken},
                     body: formData
                 })
                     .then(response => {
@@ -36,8 +34,8 @@
                     })
                     .catch(error => {
                         console.error('エラー:', error);
-                        alert('画像のアップロードに失敗しました。');
-                    });
+                        alert('画像のアップロードに失敗しました。');}
+                    );
             });
         });
     </script>
@@ -71,8 +69,10 @@
                 <p>自己紹介: {{ $artist->bio ?? '登録がありません' }}</p>
                 <p>PR文: {{ $artist->pr_statement ?? '登録がありません' }}</p>
             </div>
-            <p>ポートフォリオURL：<a href="{{ asset('storage/' . $artist['portfolio_pdf']) }} " class="btn btn-secondary">ダウンロード</a></p>
+            <p>ポートフォリオURL：<a href="{{ asset('storage/' . $artist['portfolio_pdf']) }} "
+                                    class="btn btn-secondary">ダウンロード</a></p>
         </div>
+        <div class="card mt-4">
         <h2>作品一覧</h2>
         @if($artist->artworks->isEmpty())
             <p>作品がありません。</p>
@@ -88,6 +88,7 @@
                 @endforeach
             </ul>
         @endif
+        </div>
     </div>
 
     <!-- 画像アップロード用モーダル -->

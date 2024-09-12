@@ -5,7 +5,7 @@
     <div class="contents">
         <div class="row">
         <h3 class="section_title">Login</h3>
-        <form method="POST" action="{{ route('admin.login') }}">
+        <form method="POST" action="{{ route('artist.login') }}">
             @csrf
             <div class="mb-3 col-md-6">
                 <label for="admin-email" class="form-label">Email</label>
@@ -21,7 +21,7 @@
                 <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">管理画面にログイン</button>
+            <button type="submit" class="btn btn-primary">マイページにログイン</button>
         </form>
             <p>
                 管理画面へのログインは正式なURLに移動<br>
