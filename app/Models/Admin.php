@@ -47,4 +47,12 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 管理者が作成したお知らせのリレーション
+     */
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'user');
+    }
 }

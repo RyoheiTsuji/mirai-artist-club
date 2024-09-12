@@ -109,4 +109,12 @@ class Artist extends Authenticatable
         return $this->belongsToMany(Offer::class, 'offer_artists', 'artist_id', 'offer_id');
     }
 
+    /**
+     * 作家が作成したお知らせのリレーション
+     */
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'user');
+    }
+
 }

@@ -26,4 +26,13 @@ class User extends Model
     {
         return $this->hasMany(Inquiry::class)->where('user_type', 'user');
     }
+
+    /**
+     * 一般ユーザーが作成したお知らせのリレーション
+     * 利用しないかも
+     */
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'user');
+    }
 }

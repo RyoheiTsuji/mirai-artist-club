@@ -100,7 +100,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/inquiry', [AdminInquiryController::class, 'index'])->name('admin.inquiry');
     Route::get('/admin/message', [MessageController::class, 'index'])->name('admin.message');
     Route::get('/admin/catalogue', [CatalogueController::class, 'index'])->name('admin.catalogue');
+    //サイトお知らせ機能のルート
     Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice');
+    Route::get('/admin/notice/create', [NoticeController::class, 'create'])->name('admin.notice.create');
+    Route::post('/admin/notice/store', [NoticeController::class, 'store'])->name('admin.notice.store');
+
     Route::get('/admin/page', [PageController::class, 'index'])->name('admin.page');
     Route::get('/admin/sales', [SalesController::class, 'index'])->name('admin.sales');
     Route::get('/admin/setting', [SettingController::class, 'index'])->name('admin.setting');
