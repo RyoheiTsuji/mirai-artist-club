@@ -84,5 +84,11 @@ class MypageArtworkController extends Controller
         return redirect()->route('mypage.art.index')->with('success', '作品が登録されました。');
     }
 
+    // 登録作品編集フォーム表示
+    public function edit($id){
+        $artwork = Artwork::with(['children', 'tags'])->findOrFail($id);
+        return view('mypage.art.edit', compact('artwork'));
+    }
+
 }
 

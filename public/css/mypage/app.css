@@ -49,21 +49,37 @@ ul#artwork_area > li img {
     h1{font-size:1.5rem}
     h2{font-size:1.3rem}
     h3{font-size:1.1rem;}
+    header{
+        background-color: #7e756f;
+    }
     .card{padding:1rem;}
     .page_title{}
+    .navbar-brand{ height:3rem;width:40%; line-height:3rem; display:block; }
+    .mypage_logo{width:100%;}
 
     #main_nav {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 3rem; /* 高さをヘッダーと同じに設定 */
-        background-color: #f8f9fa; /* 背景色を設定 */
+        height: 3.4rem; /* 高さをヘッダーと同じに設定 */
+        background-color: #7e756f; /* 背景色を設定 */
         z-index: 999;
         overflow-x: auto; /* 横スクロールを可能にする */
         display: flex;
         justify-content: space-around; /* ナビゲーションアイテムを均等に配置 */
+        padding:0;
     }
+    nav.navbar { width:90%; }
+    #main_nav li{width:20%;background-color:#7e756f;}
+    li.nav-item a.nav-link{
+        display:block;
+        font-size:0.6rem;
+        text-align:center;
+        color: #f3f3f3;
+    }
+    #main_nav li.nav-item a.nav-link.active{ color:#a3a3a3 }
+    a.nav-link i{ display:block;font-size:1.2rem;}
 
     #contents {
         padding-bottom: 3rem; /* main_nav分の余白を追加 */
@@ -163,6 +179,32 @@ ul#artwork_area > li img {
         padding: 1rem; /* 内側に余白を追加 */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
     }
+
+    /*作品管理*/
+    .artwork_container {
+    }
+    .artwork_container img {
+        width: 100%;
+    }
+    .imgArea {
+        position: relative;
+
+    }
+    .imgArea .imgTitle {
+        position:absolute;
+        bottom:0;
+        left:0.8rem;
+        width:100%;
+        padding:0 0.5rem;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 80%;
+    }
+    .infoArea{width:100%; padding:1rem;}
+    .infoArea dl{ width:100%; font-size:0.8rem; }
+    .infoArea dl dt{padding:0}
+    .infoArea dl dd{padding:0}
+
 
 
 }

@@ -27,6 +27,12 @@
 <div id="page_wrapper" class="container-fluid">
     <div class="row">
         <div id="main_nav">
+            @if (Agent::isMobile())
+                @include('components.nav_mypage')
+            @else
+                <!-- PC用のコンテンツ -->
+                <p>ここにPC用のメニューが表示されます</p>
+            @endif
 
         </div>
         <div id="contents">
@@ -35,6 +41,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('js/mypage_app.js') }}" defer></script>
 @stack('scripts')
 </body>

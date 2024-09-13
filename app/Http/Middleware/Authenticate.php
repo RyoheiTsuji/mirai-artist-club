@@ -27,6 +27,6 @@ class Authenticate extends Middleware
         }
 
         // デフォルトのリダイレクト先を指定
-        return route('dual-login'); // 共通のログインページにリダイレクトする場合
+        return route('home'); // 共通のログインページにリダイレクトする場合
     }
 }

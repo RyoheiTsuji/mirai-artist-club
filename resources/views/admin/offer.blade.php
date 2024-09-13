@@ -32,13 +32,7 @@
 
 @section('content')
 
-    @if (Agent::isMobile())
-        <!-- モバイル用のコンテンツ -->
-        <p>これはモバイル用のコンテンツです。</p>
-    @else
-        <!-- PC用のコンテンツ -->
-        <p>これはPC用のコンテンツです。</p>
-    @endif
+
 
     <div class="container">
         <h2 class="mb-4 page_title">案件管理</h2>

@@ -86,8 +86,8 @@ Route::post('/artist/register/details', [ArtistRegistrationController::class, 's
 
 // 一般画面内のルート設定
 Route::get('/inquiry', function () {
-    return view('auth.dual-login');
-})->name('dual-login');
+    return view('user_inquiry');
+})->name('user.inquiry');
 
 
 // 管理画面内のルート設定
@@ -144,16 +144,19 @@ Route::middleware(['auth:admin'])->group(function () {
 Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage', [MypageController::class, 'index'])->name('artist.mypage');
     //プロフィール関連のルート
+    Route::get('/mypage/profile', [MypageProfileController::class, 'index'])->name('mypage.profile');
     Route::post('/mypage/photo-upload', [MypageProfileController::class, 'photoUpload'])->name('mypage.photo.upload');
     Route::post('/mypage/profile/update', [MypageProfileController::class, 'updateProfile'])->name('mypage.profile.update');
-
-
-    //ポートフォリオ登録用のルート
     Route::post('/mypage/portfolio/register', [\App\Http\Controllers\Mypage\PortfolioController::class, 'upload'])->name('portfolio.upload');
-
     // 作品管理用のルート
     Route::get('/mypage/my_art', [MypageArtworkController::class, 'index'])->name('mypage.art.index');
+    Route::get('/mypage/my_art/edit/{id}', [MypageArtworkController::class, 'edit'])->name('mypage.art.edit');
     Route::get('/mypage/my_art/register', [MypageArtworkController::class, 'create'])->name('mypage.art.create');
     Route::post('/mypage/my_art/register', [MypageArtworkController::class, 'store'])->name('mypage.art.store');
-    // 他のアーティスト用のページもここに追加します
+    // 案件管理用ルート
+    Route::get('/mypage/offer', [MypageOfferController::class, 'index'])->name('mypage.offer');
+    // コメント管理用ルート
+    Route::get('/mypage/comment', [MypageCommentController::class, 'index'])->name('mypage.comment');
+    // 問い合わせ管理用ルート
+    Route::get('/mypage/inquiry', [MypageInquiryController::class, 'index'])->name('mypage.inquiry');
 });

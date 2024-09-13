@@ -9,6 +9,10 @@ use App\Http\Controllers\Controller;
 
 class MypageProfileController extends Controller
 {
+    public function index(){
+        $artist = Auth::user()->load('artworks');
+        return view('mypage.profile.index', compact('artist'));
+    }
     public function photoUpload(Request $request)
     {
         // バリデーション

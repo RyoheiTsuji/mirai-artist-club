@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_mypage')
 
 @push('scripts')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
