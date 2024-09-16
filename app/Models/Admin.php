@@ -62,4 +62,12 @@ class Admin extends Authenticatable
         return $this->morphMany(Inquiry::class, 'user');
     }
 
+    /**
+     * 管理者が作成したお知らせのリレーション
+     */
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'user');
+    }
+
 }

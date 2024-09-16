@@ -119,7 +119,12 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/message/search', [MessageController::class, 'search'])->name('admin.message.search');
     // カタログ作成
     Route::get('/admin/catalogue', [CatalogueController::class, 'index'])->name('admin.catalogue');
+    //サイトお知らせ機能のルート
     Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice');
+    Route::get('/admin/notice/create', [NoticeController::class, 'create'])->name('admin.notice.create');
+    Route::post('/admin/notice/store', [NoticeController::class, 'store'])->name('admin.notice.store');
+
+
     Route::get('/admin/page', [PageController::class, 'index'])->name('admin.page');
     //売買管理
     Route::get('/admin/sales', [SalesController::class, 'index'])->name('admin.sales');

@@ -35,7 +35,7 @@
 
 
     <div class="container">
-        <h2 class="mb-4 page_title">案件管理</h2>
+        <h2 class="mb-4 page-title">案件管理</h2>
 
         <div class="row">
             <!-- 案件案内機能 -->

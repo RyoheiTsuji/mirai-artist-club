@@ -123,4 +123,12 @@ class Artist extends Authenticatable
         return $this->morphMany(Inquiry::class, 'user');
     }
 
+    /**
+     * 作家が作成したお知らせのリレーション
+     */
+    public function announcements()
+    {
+        return $this->morphMany(Announcement::class, 'user');
+    }
+
 }
