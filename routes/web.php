@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\InquiryController as UserInquiryController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\ArtistAuthController;
@@ -15,12 +16,15 @@ use App\Http\Controllers\Admin\SalesController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\ArtistRegistrationController;
 use App\Http\Controllers\Mypage\MypageController;
 use App\Http\Controllers\Mypage\MypageArtworkController;
 use App\Http\Controllers\Mypage\MypageProfileController;
-use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\ArtistRegistrationController;
-use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\Mypage\MypageOfferController;
+use App\Http\Controllers\Mypage\MypageInquiryController;
+use App\Http\Controllers\Mypage\MypageCommentController;
+
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Request;
 /*
@@ -164,4 +168,5 @@ Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage/comment', [MypageCommentController::class, 'index'])->name('mypage.comment');
     // 問い合わせ管理用ルート
     Route::get('/mypage/inquiry', [MypageInquiryController::class, 'index'])->name('mypage.inquiry');
+    Route::get('/mypage/inquiry/create', [MypageInquiryController::class, 'create'])->name('mypage.inquiry.create');
 });

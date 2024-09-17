@@ -32,6 +32,7 @@ class Artist extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'furigana',
         'email',
         'password',
         'bio',

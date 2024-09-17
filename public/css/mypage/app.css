@@ -53,7 +53,8 @@ ul#artwork_area > li img {
         background-color: #7e756f;
     }
     .card{padding:1rem;}
-    .page_title{}
+    .page_title{font-size:1.2rem;}
+    .section_title{font-size:1.2rem;}
     .navbar-brand{ height:3rem;width:40%; line-height:3rem; display:block; }
     .mypage_logo{width:100%;}
 
@@ -82,12 +83,12 @@ ul#artwork_area > li img {
     a.nav-link i{ display:block;font-size:1.2rem;}
 
     #contents {
-        padding-bottom: 3rem; /* main_nav分の余白を追加 */
+        padding: 0 0 3rem; /* main_nav分の余白を追加 */
     }
 /*mypageトップ*/
     .card {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* カードにシャドウを追加 */
-        padding: 1.5rem; /* カード内に余白を追加 */
+        padding: 1rem; /* カード内に余白を追加 */
         border-radius: 8px; /* カードの角を丸く */
         background-color: #fff; /* 背景を白に設定 */
     }
@@ -205,6 +206,15 @@ ul#artwork_area > li img {
     .infoArea dl dt{padding:0}
     .infoArea dl dd{padding:0}
 
-
+/* プロフィール */
+    dl.artist-detail{padding:0.5rem}
+    dl.artist-detail dt,
+    dl.artist-detail dd{
+        border-bottom:1px solid #999999;
+        margin-bottom: 0.5rem;
+        font-size:0.9rem;
+        padding-bottom:0.2rem;
+    }
+    .furigana,.zodiac{font-size:0.7rem;}
 
 }
