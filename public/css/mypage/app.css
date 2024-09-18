@@ -1,3 +1,6 @@
+body{
+    background-color: #f9f9f9;
+}
 /* ヘッダーのスタイル */
 header {
     height: 3rem;
@@ -184,9 +187,11 @@ ul#artwork_area > li img {
     /*作品管理*/
     .artwork_container {
     }
+
     .artwork_container img {
         width: 100%;
     }
+    .select-dimension{ }
     .imgArea {
         position: relative;
 
@@ -205,6 +210,35 @@ ul#artwork_area > li img {
     .infoArea dl{ width:100%; font-size:0.8rem; }
     .infoArea dl dt{padding:0}
     .infoArea dl dd{padding:0}
+    #artwork_size input{ width:5rem; display:inline-block;margin-right:0.2rem;}
+    #artwork_size input.threeD{ width:3rem;}
+    #artwork_size input.twoD{ width:5rem;}
+    #artwork_size input.otherD{ width:10rem;}
+    #postArtworks .form-group{ width:90%; margin: 1rem auto; font-size:0.9rem; }
+    .preview-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color:#f0f0f0;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    p.preview-alert{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .imgPreview {
+        max-width: 100%;
+        max-height: 100%;
+        display: none;
+    }
+
+    .upldBtn{position: absolute; bottom: 10px; right: 10px;}
 
 /* プロフィール */
     dl.artist-detail{padding:0.5rem}

@@ -10,12 +10,16 @@ class Artwork extends Model
     use HasFactory;
 
     protected $fillable = [
+        'parent_id',
         'artist_id',
         'title',
+        'material',
         'description',
         'image_path',
-        'production_year',
-        'size',
+        'size_w',
+        'size_h',
+        'size_d',
+        'size_o',
         'proved',
     ];
 

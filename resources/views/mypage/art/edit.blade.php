@@ -1,5 +1,10 @@
 @extends('layouts.app_mypage')
 @push('scripts')
+    <script>
+        $(document).ready(function(){
+        $('#nav_artwork a').addClass('active');
+        });
+    </script>
 @endpush
 @section('content')
 <div class="content">

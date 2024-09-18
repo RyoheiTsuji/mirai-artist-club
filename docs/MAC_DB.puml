@@ -36,6 +36,7 @@ TABLE(users) {
 TABLE(artists) {
     +id : INT <<PK>>
     name : VARCHAR(255)
+    furigana : VARCHAR(255)
     email : VARCHAR(255) <<UNIQUE>>
     password : VARCHAR(255)
     bio : TEXT
@@ -62,7 +63,8 @@ TABLE(artworks) {
     description : TEXT
     image_path : VARCHAR(255)
     year : INT
-    size : VARCHAR(50)
+    size_w : INT(11)
+    size_h : INT(11)
     proved : BOOLEAN <<DEFAULT: 0>> ' (0: 非承認, 1: 承認)
     created_at : TIMESTAMP
     updated_at : TIMESTAMP
