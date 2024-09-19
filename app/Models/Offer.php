@@ -18,7 +18,7 @@ class Offer extends Model
         'application_deadline', // 募集締め切り
         'reward', // 報酬
         'description', // 案件の説明
-        'status', // 案件の状態 (0: offered, 1: accepted, 2: declined, 3: completed)
+        'status', // 案件の状態 (0: opened, 1: closed)
         'recruit_number', // 募集するアーティストの最大人数
         'offered_at', // 案件がオファーされた日
         'created_at',

@@ -14,6 +14,7 @@ class OfferArtist extends Model
     protected $fillable = [
         'offer_id', // オファーID
         'artist_id', // アーティストID
+        'applyed', // 応募済み:1 未応募:0
     ];
 
     // Offerとのリレーション (多対多)

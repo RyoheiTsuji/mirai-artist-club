@@ -166,6 +166,8 @@ Route::middleware(['auth:artist'])->group(function () {
     Route::post('/mypage/my_art/sub-image/register', [MypageArtworkController::class, 'storeSubImg'])->name('mypage.art.sub_image.register');
     // 案件管理用ルート
     Route::get('/mypage/offer', [MypageOfferController::class, 'index'])->name('mypage.offer');
+    Route::get('/mypage/offer/detail/{id}', [MypageOfferController::class, 'showOffer'])->name('mypage.offer.detail');
+    Route::get('/mypage/offer/apply/{id}', [MypageOfferController::class, 'applyOffer'])->name('mypage.offer.apply');
     // コメント管理用ルート
     Route::get('/mypage/comment', [MypageCommentController::class, 'index'])->name('mypage.comment');
     // 問い合わせ管理用ルート

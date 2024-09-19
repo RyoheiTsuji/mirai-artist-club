@@ -1,6 +1,11 @@
 body{
     background-color: #f9f9f9;
 }
+/* DBデータの改行を有効にするスタイル */
+.text-area{
+    white-space: pre-wrap;
+}
+
 /* ヘッダーのスタイル */
 header {
     height: 3rem;
@@ -49,6 +54,46 @@ ul#artwork_area > li img {
 
 /* main_navのタブレット+スマホ用スタイル */
 @media (max-width: 991.98px) {
+
+    #question_slider {
+        overflow: hidden;
+        pointer-events: none;
+        position:fixed;
+        bottom: calc( -300px + 2.5rem);
+
+        left: 0;
+        right: 0;
+        height: 300px;
+        z-Index: 500;
+    }
+    #slider_tab {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        width: 3rem;
+        height: 2.5rem;
+        position:relative;
+        background-color: #6c757d;
+        cursor: move;
+        color: white;
+        text-align: center;
+        padding: 5px 0;
+        pointer-events: auto;
+    }
+    .slider_content{
+        height:100%;
+        background: #f8f9fa;
+        border-top: 1px solid #ccc;
+    }
+
+    .message-form,
+    .message-form input,
+    .message-form textarea {
+        pointer-events:auto
+    }
+    .history { padding-left:0;}
+    .history li {list-style: none;}
+
+
     h1{font-size:1.5rem}
     h2{font-size:1.3rem}
     h3{font-size:1.1rem;}
@@ -250,5 +295,17 @@ ul#artwork_area > li img {
         padding-bottom:0.2rem;
     }
     .furigana,.zodiac{font-size:0.7rem;}
+
+/* 案件案内 */
+    dl.offer-list{width:96%; margin:auto;}
+    dl.offer-list .offer-title { font-weight:normal; padding:0; margin:0; }
+    dl.offer-list dt,
+    dl.offer-list dd{  }
+/* 案件詳細 */
+    dl.offer-detail{padding:0.5rem}
+    dl.offer-detail dt{background-color:#999999; color:white;}
+    dl.offer-detail dd{ margin-bottom:0; background-color: #fafafa; }
+    dl.offer-detail dt,
+    dl.offer-detail dd{ font-size:0.9rem; padding:0.25rem; margin-bottom:0.125rem;}
 
 }
