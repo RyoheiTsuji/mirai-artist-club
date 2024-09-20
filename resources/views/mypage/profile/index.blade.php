@@ -86,12 +86,11 @@
                     <dt class="col-3">address</dt>
                     <dd class="col-9">{{ $artist->address ?? '登録がありません' }}</dd>
 
-                    <dt class="col-3">P R</dt>
-                    <dd class="col-9">{{ $artist->pr_statement ?? '登録がありません' }}</dd>
-
                     <dt class="col-3">biography</dt>
                     <dd class="col-9">{{ $artist->bio ?? '登録がありません' }}</dd>
 
+                    <dt class="col-3">CV</dt>
+                    <dd class="col-9">{{ $artist->pr_statement ?? '登録がありません' }}</dd>
 
                     <dt class="col-3">portfolio</dt>
                     <dd class="col-9">
@@ -105,10 +104,11 @@
             </div>
             <div class="row">
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="button" class="btn btn-primary">ポートフォリオ登録</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadPortFolioModal"
+                            style="cursor: pointer;">ポートフォリオ登録</button>
                 </div>
                 <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="button" class="btn btn-primary">パスワード変更</button>
+                    <button type="button" class="btn btn-primary">CV登録</button>
                 </div>
             </div>
         </div>
@@ -134,7 +134,28 @@
                 </div>
             </div>
         </div>
-
+        <!-- ポートフォリオアップロード用モーダル -->
+        <div class="modal fade" id="uploadPortFolioModal" tabindex="-1" aria-labelledby="uploadPortFolioModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadPortFolioModalLabel">ポートフォリオをアップロード</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="uploadPortFolioForm" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="pdf" class="form-label">PDFファイルを選択</label>
+                                <input class="form-control" type="file" id="pdf" name="pdf" accept="application/pdf">
+                            </div>
+                            <button type="submit" class="btn btn-primary">アップロード</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- 情報編集用モーダル -->
         <div class="modal fade" id="editInfoModal" tabindex="-1" aria-labelledby="editInfoModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -179,6 +200,15 @@
                             <button type="submit" class="btn btn-primary">保存</button>
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- CV登録用モーダル -->
+        <div class="modal fade" id="cvEditModal" tabindex="-1" aria-labelledby="cvEditModalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header"></div>
+                    <div class="modal-body"></div>
                 </div>
             </div>
         </div>

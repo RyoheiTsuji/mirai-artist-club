@@ -132,4 +132,13 @@ class Artist extends Authenticatable
         return $this->morphMany(Announcement::class, 'user');
     }
 
+    /**
+     * CV (CurriculumVitae) とのリレーション
+     * 1人のアーティストは複数のデータを持つ
+     */
+    public function curriculumVitae()
+    {
+        return $this->hasMany(CurriculumVitae::class, 'artist_id');
+    }
+
 }

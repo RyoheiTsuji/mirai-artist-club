@@ -40,44 +40,83 @@ class MypageArtworkController extends Controller
     // 作品登録処理
     public function store(Request $request)
     {
+        // フォームからの入力データを検証
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'material' => 'required|string|max:255',
-            'size_w' => 'required|integer',
-            'size_h' => 'required|integer',
+            'dimension_type' => 'required|string|in:2D,3D,other', // 2D, 3D, その他を検証
+            'size_w' => 'nullable|integer', // サイズは条件付きで検証
+            'size_h' => 'nullable|integer',
+            'size_d' => 'nullable|integer', // 3Dの場合
+            'size_o' => 'nullable|string|max:255', // その他の場合
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'tags' => 'required|array',
             'tags.*' => 'exists:tags,id',
+            'sale_type' => 'required|array',
+            'sale_type.*' => 'in:1,2,3,4,5', // 販売状況の検証
+            'reason' => 'nullable|string|max:255', // その他の理由の入力
         ]);
 
-        //dd($request);
-
-        // ファイルの保存
+        // 画像ファイルの保存処理
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = Str::random(10) . '_' . $image->getClientOriginalName();
             $filePath = $image->storeAs('artworks', $fileName, 'public');
         }
 
-        // 作品の登録
-        $artwork = new Artwork([
+        // 'sale_type' チェックボックスで選ばれた販売状況を配列として保存
+        $sale = json_encode($request->input('sale_type'));
+
+        // サイズ情報を初期化
+        $size_w = null;
+        $size_h = null;
+        $size_d = null;
+        $size_o = null;
+
+        // 2D, 3D, その他に応じたサイズ入力処理
+        if ($request->input('dimension_type') === '2D') {
+            $size_w = $request->input('size_w');
+            $size_h = $request->input('size_h');
+        } elseif ($request->input('dimension_type') === '3D') {
+            $size_w = $request->input('size_w');
+            $size_h = $request->input('size_h');
+            $size_d = $request->input('size_d');
+        } elseif ($request->input('dimension_type') === 'other') {
+            $size_o = $request->input('size_o');
+        }
+
+        // 作品データの基本情報を登録
+        $data = [
             'artist_id' => Auth::guard('artist')->id(),
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             'material' => $request->input('material'),
-            'size_w' => $request->input('size_w'),
-            'size_h' => $request->input('size_h'),
             'image_path' => $filePath,
-        ]);
+            'sale' => $sale, // 販売状況をJSON形式で保存
+            'reason' => $request->input('reason'), // "その他" が選択された場合の理由
+        ];
+        // 2D, 3D, その他に応じたサイズをdata配列に追加
+        if ($request->input('dimension_type') === '2D') {
+            $data['size_w'] = $request->input('size_w');
+            $data['size_h'] = $request->input('size_h');
+        } elseif ($request->input('dimension_type') === '3D') {
+            $data['size_w'] = $request->input('size_w');
+            $data['size_h'] = $request->input('size_h');
+            $data['size_d'] = $request->input('size_d');
+        } elseif ($request->input('dimension_type') === 'other') {
+            $data['size_o'] = $request->input('size_o');
+        }
+        // 作品の登録処理
+        $artwork = new Artwork($data);
         $artwork->save();
 
-        // タグの保存
+        // タグの保存処理
         $artwork->tags()->sync($request->input('tags'));
 
-
+        // 管理者向けの通知の作成
         Notification::create([
-            'artist_id' => 0, // 管理者向けの通知なのでnullか0
+            'artist_id' => 0, // 管理者向けの通知なので0
             'type' => 'artwork_registered', // 通知の種類
             'data' => json_encode([
                 'artwork_id' => $artwork->id,
@@ -86,11 +125,17 @@ class MypageArtworkController extends Controller
             ]),
             'is_read' => false,
         ]);
+
+        // サブ画像の登録へリダイレクトするか完了するかを選択
         if ($request->input('action') === 'sub_image') {
-            return redirect()->route('mypage.art.sub_image', $artwork->id)->with('success', '作品が登録されました。サブ画像の登録へ進みます。');
+            return redirect()->route('mypage.art.sub_image', $artwork->id)
+                ->with('success', '作品が登録されました。サブ画像の登録へ進みます。');
         }
-        return redirect()->route('mypage.art.index')->with('success', '作品が登録されました。');
+
+        return redirect()->route('mypage.art.index')
+            ->with('success', '作品が登録されました。');
     }
+
 
     public function subImg($id){
         $artwork = Artwork::with('children','tags')->findorFail($id);

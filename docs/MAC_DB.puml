@@ -62,9 +62,13 @@ TABLE(artworks) {
     title : VARCHAR(255)
     description : TEXT
     image_path : VARCHAR(255)
-    year : INT
     size_w : INT(11)
     size_h : INT(11)
+    size_d : INT(11)
+    size_o : VARCHAR(255)
+    material : VARCHAR(255)
+    sale : JSON <<DEFAULT: [0]>> ' 0から5までの数字が配列形式で入る
+    reason : VARCHAR(255) <<NULLABLE>> ' 理由を格納するカラム
     proved : BOOLEAN <<DEFAULT: 0>> ' (0: 非承認, 1: 承認)
     created_at : TIMESTAMP
     updated_at : TIMESTAMP
@@ -83,11 +87,12 @@ TABLE(tags) {
 }
 
 ' 受賞歴テーブル
-TABLE(artist_awards) {
+TABLE(curriculum_vitae) {
     +id : INT <<PK>>
     artist_id : INT <<FK>>
-    award_year : INT
-    award_details : VARCHAR(255)
+    year : INT
+    month : INT
+    details : VARCHAR(255)
     created_at : TIMESTAMP
     updated_at : TIMESTAMP
     deleted_at : TIMESTAMP
@@ -211,7 +216,7 @@ offers ||--o{ offer_artists : "1:N"
 artists ||--o{ offer_artists : "1:N"
 offers ||--o{ offer_tags : "1:N"
 tags ||--o{ offer_tags : "1:N"
-artists ||--o{ artist_awards : "1:N"
+artists ||--o{ curriculum_vitae : "1:N"
 artists ||--o{ inquiries : "1:N (user_typeが'artist'の場合)"
 users ||--o{ inquiries : "1:N (user_typeが'user'の場合)"
 admins ||--o{ inquiries : "1:N (user_typeが'admin'の場合)"

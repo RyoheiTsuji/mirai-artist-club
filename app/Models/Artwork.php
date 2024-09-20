@@ -14,6 +14,8 @@ class Artwork extends Model
         'artist_id',
         'title',
         'material',
+        'sale',
+        'reason',
         'description',
         'image_path',
         'size_w',

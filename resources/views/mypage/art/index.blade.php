@@ -32,6 +32,18 @@
                             <p>{{ $artwork->material }}</p>
                             <p>縦：{{ $artwork->size_h }}cm / 横：{{ $artwork->size_w }}cm</p>
                             <p>{{ $artwork->description }}</p>
+                            <!-- 販売状況の表示 -->
+                            @php
+                                $saleTypes = config('admin_setting.SALE_TYPES'); // SALE_TYPESを取得
+                                $sales = json_decode($artwork->sale); // JSON形式で保存されている場合
+                            @endphp
+                            @if($sales)
+                                <p>販売状況:
+                                    @foreach($sales as $sale)
+                                        {{ $saleTypes[$sale] ?? '不明' }}@if (!$loop->last), @endif
+                                    @endforeach
+                                </p>
+                            @endif
                             <div class="row">
                                 @foreach($tags as $tag)
                                 <span class="col-4">{{ $tag->name }}</span>
