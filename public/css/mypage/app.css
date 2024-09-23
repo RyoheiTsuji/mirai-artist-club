@@ -54,7 +54,48 @@ ul#artwork_area > li img {
 
 /* main_navのタブレット+スマホ用スタイル */
 @media (max-width: 991.98px) {
-
+/* バーガーメニュー */
+    /* オフキャンバスメニュー全体のスタイル */
+    .offcanvas {
+        background-color: #343a40; /* 背景色をダークに */
+        color: #fff; /* 文字色を白に */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 軽いシャドウを追加 */
+    }
+    /* ヘッダー部分のスタイル */
+    .offcanvas-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* 下部に薄い線を追加 */
+    }
+    .offcanvas-title {
+        font-size: 1.5rem; /* タイトルを大きめに */
+        color: #ffc107; /* ゴールドのアクセント */
+    }
+    /* 閉じるボタンのスタイル */
+    .btn-close {
+        filter: invert(100%); /* 白いクロスボタンに変更 */
+    }
+    /* リストアイテムのスタイル */
+    .offcanvas-body ul li {
+        margin: 10px 0; /* 上下に少し余白を追加 */
+    }
+    /* リンクのスタイル */
+    .offcanvas-body .nav-link {
+        font-size: 1.2rem; /* フォントサイズを大きめに */
+        color: #ffc107; /* リンクの色をゴールドに */
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    /* リンクのホバーエフェクト */
+    .offcanvas-body .nav-link:hover {
+        background-color: #ffc107; /* 背景色をゴールドに */
+        color: #343a40; /* 文字色をダークに */
+    }
+    /* リンクのアクティブ状態のスタイル */
+    .offcanvas-body .nav-link:active {
+        background-color: #e0a800; /* 少し濃いゴールド */
+        color: #fff;
+    }
+/* 質問箱 */
     #question_slider {
         overflow: hidden;
         pointer-events: none;
@@ -87,11 +128,18 @@ ul#artwork_area > li img {
 
     .message-form,
     .message-form input,
-    .message-form textarea {
-        pointer-events:auto
-    }
+    .message-form textarea {pointer-events:auto}
     .history { padding-left:0;}
     .history li {list-style: none;}
+
+    /* 受信箱 */
+    .accordion-toggle-icon {
+        display: inline-block;
+        transition: transform 0.3s ease; /* 0.3秒で回転 */
+        padding-top:0.3rem;
+        font-size:0.7rem
+    }
+    .rotate-down {transform: rotate(90deg); /* 右向き（▶）を下向き（▼）に */}
 
 
     h1{font-size:1.5rem}

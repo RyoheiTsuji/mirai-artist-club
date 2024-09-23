@@ -21,11 +21,13 @@ class MypageArtworkController extends Controller
         // アーティストが存在するか確認し、作品を取得
         if ($artist) {
             $artworks = $artist->artworks; // アーティストに紐づく作品を取得
+            $parentCount = $artworks->where('parent_id', null)->count(); // parent_idが0のレコードをカウント
         } else {
             $artworks = collect(); // アーティストが存在しない場合は空のコレクションを返す
+            $parentCount = 0;
         }
 
-        return view('mypage.art.index', compact('artworks','tags'));
+        return view('mypage.art.index', compact('artworks','tags', 'parentCount'));
     }
 
     // 作品登録フォーム表示

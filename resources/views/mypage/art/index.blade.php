@@ -11,7 +11,13 @@
 @section('content')
     <div class="container mt-3">
         <h1 class="page_title">登録作品一覧</h1>
-        <a href="{{ route('mypage.art.create') }}" class="btn btn-primary">新しい作品を登録</a>
+        <p>現在の登録作品数：{{ $parentCount  }}件</p>
+
+@if( $parentCount < 3 )
+    <a href="{{ route('mypage.art.create') }}" class="btn btn-primary">新しい作品を登録</a>
+@else
+    <a href="{{ route('mypage.art.create') }}" class="btn btn-primary">お腹いっぱい</a>
+@endif
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -20,7 +26,7 @@
         @endif
 
         @if(!$artworks || $artworks->isEmpty())
-            <p>残念ながら登録されている作品がありません。</p>
+            <p>現在作品は登録されていません。</p>
         @else
             <div class="container mt-5">
                 @foreach($artworks->where('parent_id', null) as $artwork)

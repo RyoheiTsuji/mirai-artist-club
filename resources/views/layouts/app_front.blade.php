@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Mirai Artist Club') }}</title>
-
+    <!-- favicons -->
+    <link rel="icon" href="{{ asset('storage/favicon/favicon.ico') }}" sizes="32x32"><!-- 32×32 -->
+    <link rel="icon" href="{{ asset('storage/favicon/icon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('storage/favicon/apple-touch-icon.png') }}"><!-- 180×180 -->
+    <link rel="manifest" href="{{ asset('storage/favicon/manifest.webmanifest') }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 

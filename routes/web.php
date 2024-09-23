@@ -21,6 +21,7 @@ use App\Http\Controllers\ArtistRegistrationController;
 use App\Http\Controllers\Mypage\MypageController;
 use App\Http\Controllers\Mypage\MypageArtworkController;
 use App\Http\Controllers\Mypage\MypageProfileController;
+use App\Http\Controllers\Mypage\PortfolioController;
 use App\Http\Controllers\Mypage\MypageOfferController;
 use App\Http\Controllers\Mypage\MypageInquiryController;
 use App\Http\Controllers\Mypage\MypageCommentController;
@@ -156,7 +157,7 @@ Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage/profile', [MypageProfileController::class, 'index'])->name('mypage.profile');
     Route::post('/mypage/photo-upload', [MypageProfileController::class, 'photoUpload'])->name('mypage.photo.upload');
     Route::post('/mypage/profile/update', [MypageProfileController::class, 'updateProfile'])->name('mypage.profile.update');
-    Route::post('/mypage/portfolio/register', [\App\Http\Controllers\Mypage\PortfolioController::class, 'upload'])->name('portfolio.upload');
+    Route::post('/mypage/portfolio/register', [PortfolioController::class, 'upload'])->name('portfolio.upload');
     // 作品管理用のルート
     Route::get('/mypage/my_art', [MypageArtworkController::class, 'index'])->name('mypage.art.index');
     Route::get('/mypage/my_art/edit/{id}', [MypageArtworkController::class, 'edit'])->name('mypage.art.edit');
@@ -170,7 +171,13 @@ Route::middleware(['auth:artist'])->group(function () {
     Route::get('/mypage/offer/apply/{id}', [MypageOfferController::class, 'applyOffer'])->name('mypage.offer.apply');
     // コメント管理用ルート
     Route::get('/mypage/comment', [MypageCommentController::class, 'index'])->name('mypage.comment');
+    Route::post('/mypage/comment/register', [MypageCommentController::class, 'register'])->name('mypage.comment.register');
+    Route::post('/mypage/comment/toggle-status', [MypageCommentController::class, 'toggleStatus'])->name('mypage.comment.toggleStatus');// AJAX POST
+    Route::post('/mypage/comment/delete', [MypageCommentController::class, 'delete'])->name('mypage.comment.delete');// AJAX POST)
+
     // 問い合わせ管理用ルート
     Route::get('/mypage/inquiry', [MypageInquiryController::class, 'index'])->name('mypage.inquiry');
-    Route::get('/mypage/inquiry/create', [MypageInquiryController::class, 'create'])->name('mypage.inquiry.create');
+    Route::post('/mypage/inquiry/register', [MypageInquiryController::class, 'register'])->name('mypage.inquiry.register');
+    Route::post('/mypage/inquiry/reply', [MypageInquiryController::class, 'reply'])->name('mypage.inquiry.reply');
+
 });

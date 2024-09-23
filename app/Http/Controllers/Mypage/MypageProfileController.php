@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Mypage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class MypageProfileController extends Controller
@@ -40,12 +41,14 @@ class MypageProfileController extends Controller
         // クライアントにレスポンスを返す
         return response()->json(['success' => true, 'photo_url' => Storage::url($path)]);
     }
-
     public function updateProfile(Request $request)
     {
         // バリデーション
         $request->validate([
             'name' => 'required|string|max:255',
+            'furigana' => 'nullable|string|max:255', // フリガナを追加
+            'phone_number' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
         ]);
 
@@ -54,11 +57,14 @@ class MypageProfileController extends Controller
 
         // プロフィール情報の更新
         $artist->name = $request->input('name');
+        $artist->furigana = $request->input('furigana'); // フリガナを更新
+        $artist->phone_number = $request->input('phone_number');
+        $artist->address = $request->input('address');
         $artist->bio = $request->input('bio');
         $artist->save();
 
-        // クライアントにレスポンスを返す
-        return response()->json(['success' => true, 'message' => 'プロフィールが更新されました。']);
+        // プロフィールページにリダイレクト
+        return redirect()->route('mypage.profile')->with('success', 'プロフィールが更新されました。');
     }
 }
 

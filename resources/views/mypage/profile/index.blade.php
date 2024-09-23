@@ -2,12 +2,10 @@
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
         $(document).ready(function(){
             $('#nav_profile a').addClass('active');
         });
-
         document.addEventListener('DOMContentLoaded', function () {
             const uploadForm = document.querySelector('#uploadImageForm');
             const uploadModal = new bootstrap.Modal(document.getElementById('uploadImageModal'));
@@ -51,6 +49,7 @@
         $zodiacSign = \App\Helpers\Zodiac::getZodiacSign($birthday);
     @endphp
     <div class="container">
+        <!-- profileページ メインコンテンツ -->
         <div class="card mt-4 mb-4">
             <div class="myPhoto">
                 <img id="artistPhoto"
@@ -89,9 +88,6 @@
                     <dt class="col-3">biography</dt>
                     <dd class="col-9">{{ $artist->bio ?? '登録がありません' }}</dd>
 
-                    <dt class="col-3">CV</dt>
-                    <dd class="col-9">{{ $artist->pr_statement ?? '登録がありません' }}</dd>
-
                     <dt class="col-3">portfolio</dt>
                     <dd class="col-9">
                         @if (!empty($artist['portfolio_pdf']))
@@ -103,12 +99,14 @@
                 </dl>
             </div>
             <div class="row">
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadPortFolioModal"
-                            style="cursor: pointer;">ポートフォリオ登録</button>
-                </div>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="button" class="btn btn-primary">CV登録</button>
+                <div class="d-grid gap-2 col-8 mx-auto">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadPortFolioModal" style="cursor: pointer;">
+                        @if (!empty($artist['portfolio_pdf']))
+                            ポートフォリオ再登録
+                        @else
+                            ポートフォリオ登録
+                        @endif
+                    </button>
                 </div>
             </div>
         </div>
@@ -140,11 +138,17 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="uploadPortFolioModalLabel">ポートフォリオをアップロード</h5>
+                        <h5 class="modal-title" id="uploadPortFolioModalLabel">
+                            @if (!empty($artist['portfolio_pdf']))
+                                ポートフォリオを再登録
+                            @else
+                                ポートフォリオをアップロード
+                            @endif
+                        </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="uploadPortFolioForm" enctype="multipart/form-data">
+                        <form id="uploadPortFolioForm" enctype="multipart/form-data" action="{{ route('portfolio.upload') }}" method="post">
                             @csrf
                             <div class="mb-3">
                                 <label for="pdf" class="form-label">PDFファイルを選択</label>
@@ -165,12 +169,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="profileForm">
+                        <form id="profileForm" action="{{ route('mypage.profile.update') }}" method="POST">
                             @csrf
-                            <!-- 必要な入力フィールドを追加 -->
                             <div class="mb-3">
                                 <label for="name" class="form-label">名前</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ $artist->name }}">
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $artist->name }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="furigana" class="form-label">フリガナ</label>
@@ -193,22 +196,10 @@
                                 <label for="bio" class="form-label">バイオグラフィ</label>
                                 <textarea class="form-control" id="bio" name="bio">{{ $artist->bio }}</textarea>
                             </div>
-                            <div class="mb-3">
-                                <label for="pr" class="form-label">PR文</label>
-                                <textarea class="form-control" id="pr" name="pr_statement">{{ $artist->pr_statement }}</textarea>
-                            </div>
+
                             <button type="submit" class="btn btn-primary">保存</button>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!-- CV登録用モーダル -->
-        <div class="modal fade" id="cvEditModal" tabindex="-1" aria-labelledby="cvEditModalLabel" aria-hidden="true" >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header"></div>
-                    <div class="modal-body"></div>
                 </div>
             </div>
         </div>
