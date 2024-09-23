@@ -161,6 +161,7 @@ Route::middleware(['auth:artist'])->group(function () {
     // 作品管理用のルート
     Route::get('/mypage/my_art', [MypageArtworkController::class, 'index'])->name('mypage.art.index');
     Route::get('/mypage/my_art/edit/{id}', [MypageArtworkController::class, 'edit'])->name('mypage.art.edit');
+    Route::get('/mypage/my_art/delete/{id}', [MypageArtworkController::class, 'delete'])->name('mypage.art.delete');
     Route::get('/mypage/my_art/register', [MypageArtworkController::class, 'create'])->name('mypage.art.create');
     Route::post('/mypage/my_art/register', [MypageArtworkController::class, 'store'])->name('mypage.art.store');
     Route::get('/mypage/my_art/sub-image/{id}', [MypageArtworkController::class, 'subImg'])->name('mypage.art.sub_image');

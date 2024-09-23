@@ -186,5 +186,22 @@ class MypageArtworkController extends Controller
         return view('mypage.art.edit', compact('artwork'));
     }
 
+    public function delete($id)
+    {
+        // 指定されたIDの作品を取得
+        $artwork = Artwork::find($id);
+
+        if (!$artwork) {
+            return redirect()->route('mypage.art.index')->with('error', '作品が見つかりません。');
+        }
+
+        // 作品を削除（論理削除、物理削除の場合はdeleteメソッドを使用）
+        $artwork->delete();
+
+        // 成功メッセージを返してリダイレクト
+        return redirect()->route('mypage.art.index')->with('success', '作品を削除しました。');
+    }
+
+
 }
 

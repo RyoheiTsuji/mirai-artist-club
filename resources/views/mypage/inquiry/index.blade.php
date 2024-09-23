@@ -2,21 +2,18 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#nav_inquiry a').addClass('active');
-
             // ログイン中のアーティストIDをBladeから渡す
             const artistId = "{{ Auth::id() }}"; // Auth::id() を使ってログイン中のユーザーIDを取得
-
             // CSRFトークンをAjaxリクエストに自動で含める
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
             // 返信するボタンがクリックされたときにモーダルを表示
-            $('button.btn-secondary').on('click', function(e){
+            $('button.btn-secondary').on('click', function(e) {
                 e.preventDefault();
 
                 // 親の list-group-item から親IDと件名、inq_typeを取得
@@ -44,27 +41,28 @@
                 });
                 replyModal.show(); // モーダルを表示
             });
+            // フォームの送信時にのみAjaxリクエストを送信
+            $('#replyForm').on('submit', function(e) {
+                e.preventDefault(); // 通常のフォーム送信を無効化
 
-            // フォームのaction属性を確認
-            console.log('送信先URL:', $(this).attr('action'));
-
-            $.ajax({
-                url: $(this).attr('action'), // フォームのアクションURLを取得
-                method: 'POST',
-                data: $(this).serialize(), // フォームデータをシリアライズ
-                success: function(response) {
-                    console.log('サーバーからのレスポンス:', response); // サーバーの応答をログに出力
-                    alert('返信が送信されました。');
-                    $('#replyModal').modal('hide'); // モーダルを閉じる
-                },
-                error: function(xhr, status, error) {
-                    console.error('エラーが発生しました:', xhr.responseText); // エラー詳細をログに出力
-                    alert('送信中にエラーが発生しました。');
-                }
+                $.ajax({
+                    url: $(this).attr('action'), // フォームのアクションURLを取得
+                    method: 'POST',
+                    data: $(this).serialize(), // フォームデータをシリアライズ
+                    success: function(response) {
+                        console.log('サーバーからのレスポンス:', response); // サーバーの応答をログに出力
+                        alert('返信が送信されました。');
+                        $('#replyModal').modal('hide'); // モーダルを閉じる
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('エラーが発生しました:', xhr.responseText); // エラー詳細をログに出力
+                        console.error('Status:', status); // HTTPステータスコード
+                        console.error('Error:', error); // エラー内容
+                        alert('送信中にエラーが発生しました。');
+                    }
+                });
             });
         });
-
-
         document.addEventListener('DOMContentLoaded', function() {
             // すべてのリストアイテムを取得
             const listItems = document.querySelectorAll('.list-group-item');
