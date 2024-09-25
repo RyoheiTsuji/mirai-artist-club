@@ -1,5 +1,18 @@
-.contents{
-    max-width: 960px;
-    margin: 2rem auto;
-
-}
+body{ color:#444; }
+.card { max-width: 960px; padding:2rem 1.5rem }
+.card-title { text-align:center;}
+.card-body { color:#444; }
+.section-title { width:50%; margin:auto; font-size:1.2rem; border-bottom:1px solid #01aeb3; line-height:2rem; color:#666; }
+.contents{max-width: 960px;margin: 2rem auto;}
+.btn-login{background-color: #01aeb3;color:white;}
+.btn-login:hover{background-color: #007377;color:white;}
+.btn-outline-login{border-color: #01aeb3;color:#01aeb3;}
+.btn-outline-login:hover{border-color: #007377;background-color: #01aeb3; color:white;}
+#navList{}
+#navList a{ color:#01aeb3; text-decoration:none; font-weight:bold; }
+#navList a:hover{ color:#00a6ac; text-decoration:none; }
+#dropdownMenu { z-index:1000 !important; background-color:rgb(251, 251, 251); }
+#dropdownMenu ul.list-group{ width:90%; margin:auto; }
+#dropdownMenu .list-group .list-group-item a{ display:block; text-decoration:none; color:#01aeb3; text-align:center;}
+#dropdownMenu .list-group-item { background:none; transition: background-color 0.5s ease;}
+#dropdownMenu .list-group-item:hover { background-color:#dee2e6; }

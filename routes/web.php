@@ -48,13 +48,8 @@ Route::get('/',  [FrontController::class, 'index'])->name('home');
 
 
 /*一般ページ問い合わせルート*/
-Route::get('/inquiry', function(){
-    return view('user_inquiry');
-});
 Route::get('/inquiry', [UserInquiryController::class, 'index'])->name('inquiry.form');
 Route::post('/inquiry', [UserInquiryController::class, 'submitForm'])->name('inquiry.submit');
-
-
 
 // エラーページへのルートを
 Route::get('/error-page', function () {
@@ -89,10 +84,7 @@ Route::get('/artist/verify/{token}', [ArtistRegistrationController::class, 'veri
 Route::get('/artist/register/details', [ArtistRegistrationController::class, 'showDetailsForm'])->name('artist.details.form');
 Route::post('/artist/register/details', [ArtistRegistrationController::class, 'submitDetails'])->name('artist.details.submit');
 
-// 一般画面内のルート設定
-Route::get('/inquiry', function () {
-    return view('user_inquiry');
-})->name('user.inquiry');
+
 
 
 // 管理画面内のルート設定

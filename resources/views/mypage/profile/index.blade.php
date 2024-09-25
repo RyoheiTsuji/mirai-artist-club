@@ -45,7 +45,7 @@
 @endpush
 @section('content')
     @php
-        $birthday = isset($artist->birthday) ? \Carbon\Carbon::parse($artist->birthday)->format('Y-m-d') : '未登録';
+        $birthday = isset($artist->birthday) ? \Carbon\Carbon::parse($artist->birthday)->format('Y.m.d') : '未登録';
         $zodiacSign = \App\Helpers\Zodiac::getZodiacSign($birthday);
     @endphp
     <div class="container">
@@ -58,36 +58,27 @@
                 <!-- アイコンを表示 -->
                 <ul class="controlBox">
                     <li>
-                        <i class="fa-solid fa-cloud-arrow-up" data-bs-toggle="modal" data-bs-target="#uploadImageModal"
-                           style="cursor: pointer;"></i>
-                    </li>
-                    <li>
-                        <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#editInfoModal"
+                        <i class="fa-solid fa-image" data-bs-toggle="modal" data-bs-target="#uploadImageModal"
                            style="cursor: pointer;"></i>
                     </li>
                 </ul>
             </div>
             <div id="artist_detail">
-                <h2 class="section-title">my profile</h2>
+                <h2 class="section-title">my profile <i class="fa-solid fa-pen-to-square ms-3 fs-5" data-bs-toggle="modal" data-bs-target="#editInfoModal"
+                                                        style="cursor: pointer;"></i></h2>
                 <dl class="row artist-detail">
                     <dt class="col-3">name</dt>
                     <dd class="col-9">{{ $artist->name }} <span class="furigana">({{ $artist->furigana ?? 'フリガナの登録がありません'  }})</span></dd>
-
                     <dt class="col-3">birthday</dt>
                     <dd class="col-9">{{ $birthday ?? '登録がありません'  }} <span class="zodiac">({{ $zodiacSign }})</span></dd>
-
                     <dt class="col-3">email</dt>
                     <dd class="col-9">{{ $artist->email }}</dd>
-
                     <dt class="col-3">phone</dt>
                     <dd class="col-9">{{ $artist->phone_number }}</dd>
-
                     <dt class="col-3">address</dt>
                     <dd class="col-9">{{ $artist->address ?? '登録がありません' }}</dd>
-
                     <dt class="col-3">biography</dt>
                     <dd class="col-9">{{ $artist->bio ?? '登録がありません' }}</dd>
-
                     <dt class="col-3">portfolio</dt>
                     <dd class="col-9">
                         @if (!empty($artist['portfolio_pdf']))

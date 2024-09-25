@@ -29,7 +29,6 @@ class MypageArtworkController extends Controller
 
         return view('mypage.art.index', compact('artworks','tags', 'parentCount'));
     }
-
     // 作品登録フォーム表示
     public function create()
     {
@@ -38,7 +37,6 @@ class MypageArtworkController extends Controller
 
         return view('mypage.art.create', compact('tags'));
     }
-
     // 作品登録処理
     public function store(Request $request)
     {
@@ -137,8 +135,6 @@ class MypageArtworkController extends Controller
         return redirect()->route('mypage.art.index')
             ->with('success', '作品が登録されました。');
     }
-
-
     public function subImg($id){
         $artwork = Artwork::with('children','tags')->findorFail($id);
         return view('mypage.art.sub-image', compact('artwork'));
@@ -185,7 +181,7 @@ class MypageArtworkController extends Controller
         $artwork = Artwork::with(['children', 'tags'])->findOrFail($id);
         return view('mypage.art.edit', compact('artwork'));
     }
-
+    // 登録作品削除処理
     public function delete($id)
     {
         // 指定されたIDの作品を取得
